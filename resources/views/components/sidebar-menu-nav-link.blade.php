@@ -10,7 +10,7 @@
         @if($icon)
             <i class="{{$icon}}"></i>
         @endif
-        <span>{{$label}}</span>
+        {{$label}}
         @if($sublinks)
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -20,8 +20,9 @@
     </a>
     @if($sublinks)
         <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            @foreach($sublinks as $sublink)
+                <li class="{{ str_contains(request()->path(), $sublink['url']) ? 'active' : '' }}"><a href="{{$sublink['url']}}">{{$sublink['label']}}</a></li>
+            @endforeach
         </ul>
     @endif
 
