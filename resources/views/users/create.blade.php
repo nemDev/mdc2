@@ -1,7 +1,7 @@
 <x-layout>
-    <div class="d-flex justify-content-between">
-        <h1 class="text-center d-inline">Create User</h1>
-        <a href="{{route('users.index')}}" class="btn btn-primary" style="margin-bottom: 10px;">
+    <div class="d-flex justify-content-between align-items-center py-5">
+        <h1 class="m-0">Create User</h1>
+        <a href="{{route('users.index')}}" class="btn btn-primary" >
             Back to users
         </a>
     </div>

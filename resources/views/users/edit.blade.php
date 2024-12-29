@@ -1,7 +1,7 @@
 <x-layout>
-    <div class="d-flex justify-content-between">
-        <h1 class="text-center d-inline">Edit User</h1>
-        <a href="{{route('users.index')}}" class="btn btn-primary" style="margin-bottom: 10px;">
+    <div class="d-flex justify-content-between align-items-center py-5">
+        <h1 class="m-0">Edit User</h1>
+        <a href="{{route('users.index')}}" class="btn btn-primary">
             Back to users
         </a>
     </div>
@@ -27,17 +27,6 @@
             />
 
             <x-inputs.text
-                id="password"
-                name="password"
-                label="Password"
-                type="password"
-                :value="old('title', $user->password)"
-                placeholder="Password"
-            />
-
-
-
-            <x-inputs.text
                 id="permissions"
                 name="permissions"
                 label="Permissions comma separated (permission1, permission2)"
@@ -47,9 +36,53 @@
                 :description="$permissions"
             />
 
+            <x-inputs.checkbox
+                id="passwordChange"
+                name="passwordChange"
+                label="Change password"
+                class="passwordChangeCheckbox"
+                :checked="old('passwordChange')"
+            />
+
+            <div class="changePasswordWrapper">
+                <x-inputs.text
+                    id="password"
+                    name="password"
+                    label="New password"
+                    type="password"
+                    :value="old('password')"
+                    placeholder="New password"
+                />
+
+                <x-inputs.text
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    label="Confirm new password"
+                    type="password"
+                    :value="old('password_confirmation')"
+                    placeholder="Confirm new password"
+                />
+            </div>
             <button type="submit" class="btn btn-block btn-primary">Submit</button>
         </form>
     </div>
 
+    <script>
+        window.addEventListener('DOMContentLoaded', function (){
+            const passwordCheckbox = document.getElementById('passwordChange');
+            const changePasswordWrapper = document.querySelector('.changePasswordWrapper');
+            changePasswordWrapper.style.display = 'none';
+            if(passwordCheckbox.checked){
+                changePasswordWrapper.style.display = 'block';
+            }
 
+            passwordCheckbox.addEventListener('change', function (){
+                if(passwordCheckbox.checked){
+                    changePasswordWrapper.style.display = 'block';
+                }else{
+                    changePasswordWrapper.style.display = 'none';
+                }
+            })
+        });
+    </script>
 </x-layout>

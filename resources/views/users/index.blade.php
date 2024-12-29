@@ -1,7 +1,7 @@
 <x-layout>
-    <div class="d-flex justify-content-between">
-        <h1 class="text-center d-inline">Users Page</h1>
-        <div class="text-end">
+    <div class="" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+        <h1 class="">Users Page</h1>
+        <div class="">
             <a href="{{route('users.create')}}" class="btn btn-primary" style="margin-bottom: 10px;">
                 Add new user
             </a>
@@ -50,10 +50,10 @@
                                         @endforelse
                                     </td>
                                     <td>
-                                        <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary pull-left">
+                                        <a href="{{route('users.edit', $user->id)}}" class="btn-sm btn-primary pull-left">
                                             <i class="fa fa-edit"></i> Edit
                                         </a>
-                                        <a href="/" class="btn btn-danger pull-left" style="margin-left: 5px;">
+                                        <a href="/" class="btn-sm btn-danger pull-left" style="margin-left: 5px;">
                                             <i class="fa fa-edit"></i> Delete
                                         </a>
                                     </td>

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Import;
 use App\Models\Permission;
 use App\Models\User;
 use \Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -41,14 +44,17 @@ class UserController extends Controller
         $data = $request->validate([
             'email' => 'required|email|unique:users',
             'username' => 'required|unique:users',
-            'password' => 'required',
+            'password' => 'required|min:6',
             'permissions'=> 'nullable'
         ]);
         //Create user
         $user = User::create($data);
         //Attach permissions to user
-        $permissions = convertPermissionsToArray($data['permissions']);
-        $user->permissions()->attach($permissions);
+        if($data['permissions']){
+            $permissions = convertPermissionsToArray($data['permissions']);
+            $user->permissions()->attach($permissions);
+        }
+
         //Redirect
         return redirect()->route('users.index')->with(['success' => 'User created successfully.']);
     }
@@ -83,13 +89,44 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         Gate::authorize('have-permission', ['user-management']);
+
         $data = $request->validate([
-            'permissions'=> 'nullable'
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($user->id)
+            ],
+            'password' => [
+                'nullable',
+                'string',
+                'min:6',
+                'confirmed'
+            ],
+            'permissions'=> 'nullable',
+            'passwordChange' => 'nullable'
         ]);
 
-        $permissions = convertPermissionsToArray($data['permissions']);
+        //Handle permissions
         $user->permissions()->detach();
-        $user->permissions()->attach($permissions);
+        if($data['permissions']){
+            $permissions = convertPermissionsToArray($data['permissions']);
+            $user->permissions()->attach($permissions);
+        }
+
+        // Update user details
+        $user->update([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => $data['password'] && isset($data['passwordChange']) ? Hash::make($data['password']) : $user->password,
+        ]);
+
         return redirect()->route('users.index')->with(['success' => 'User updated successfully.']);
     }
 
