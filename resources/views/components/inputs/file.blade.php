@@ -4,7 +4,8 @@
     'label' => null,
     'value'=>'',
     'type' => 'file',
-    'multiple' => true
+    'multiple' => true,
+    'helpText' => ''
 ])
 
 <div class="form-group @error($name) has-error @enderror">
@@ -24,6 +25,10 @@
         class="form-control"
         @if($multiple) multiple @endif
     />
+    @if($helpText)
+        <p class="help-block">{{$helpText}}</p>
+    @endif
+
     @error($name)
     <p class="help-block">
         {{$message}}

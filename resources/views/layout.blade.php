@@ -17,7 +17,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{asset('AdminLTE-2.4.18/plugins/iCheck/all.css')}}">
     <link rel="stylesheet" href="{{asset('AdminLTE-2.4.18/bower_components/select2/dist/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('AdminLTE-2.4.18/dist/css/skins/skin-blue.min.css')}}">
-
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -53,5 +52,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="{{asset('AdminLTE-2.4.18/dist/js/adminlte.min.js')}}"></script>
 
+{{ $script ?? ''}}
 </body>
 </html>
