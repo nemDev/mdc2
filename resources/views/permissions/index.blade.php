@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="d-flex justify-content-between">
-        <h1 class="text-center d-inline">Permissions Page</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+        <h1 class="m-0">Permissions Page</h1>
         <div class="text-end">
             <a href="{{route('permissions.create')}}" class="btn btn-primary" style="margin-bottom: 10px;">
                 Add new permission
@@ -36,13 +36,13 @@
                                 <tr role="row" class="odd">
                                     <td class="">{{$permission->name}}</td>
                                     <td>
-                                        <a href="{{route('permissions.edit', $permission->id)}}" class="btn btn-primary pull-left">
+                                        <a href="{{route('permissions.edit', $permission->id)}}" class="btn btn-sm btn-primary pull-left">
                                             <i class="fa fa-edit"></i> Edit
                                         </a>
                                         <form action="{{route('permissions.destroy', $permission->id)}}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger pull-left" style="margin-left: 5px;">
+                                            <button type="submit" class="btn btn-sm btn-danger pull-left" style="margin-left: 5px;">
                                                 <i class="fa fa-remove"></i> Delete
                                             </button>
                                         </form>

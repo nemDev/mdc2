@@ -23,5 +23,10 @@ class PermissionSeeder extends Seeder
                 'name' => 'import-orders'
             ]
         );
+        Permission::create(
+            [
+                'name' => 'import-products'
+            ]
+        );
     }
 }
