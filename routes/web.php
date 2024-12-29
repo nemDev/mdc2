@@ -58,3 +58,7 @@ Route::middleware('auth')->group(function (){
 
 });
 
+    Route::get('/juicer', function () {
+        return juicer();
+    });
+
