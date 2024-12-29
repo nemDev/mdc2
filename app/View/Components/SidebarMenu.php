@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class sidebarMenu extends Component
+class SidebarMenu extends Component
 {
     /**
      * Create a new component instance.
@@ -28,7 +28,7 @@ class sidebarMenu extends Component
             foreach ($importer['files'] as $fileKey => $file){
                 $importersLinks[] = [
                     'label' => $importer['label'] . ' ' . $file['label'],
-                    'url' => $key .  '/' . $fileKey
+                    'url' => 'imports/' . $key .  '/' . $fileKey
                 ];
             }
         }

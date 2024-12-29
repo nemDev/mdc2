@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class sidebarMenuNavLink extends Component
+class SidebarMenuNavLink extends Component
 {
     /**
      * Create a new component instance.
