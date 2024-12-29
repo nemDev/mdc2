@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Models\Permission;
 
 if (!function_exists('convertPermissionsToString')) {
@@ -40,5 +41,23 @@ if (!function_exists('convertPermissionsToArray')) {
         }
 
         return $permissions;
+    }
+}
+
+if (!function_exists('getAllowedImportTypes')) {
+    /**
+     * Convert permissions from comma separated string to array
+     * @return array
+     * @param array $permissions
+     * @param array $importTypes
+     */
+    function getAllowedImportTypes(array $permissions, array $importTypes):array
+    {
+        foreach ($importTypes as $key => $type) {
+            if(!in_array($type['permission_required'], $permissions)) {
+                unset($importTypes[$key]);
+            }
+        }
+        return $importTypes;
     }
 }
