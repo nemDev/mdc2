@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\ImportError;
 use App\Imports\FileImport;
 use App\Models\Upload;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,7 +32,13 @@ class ImportJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Excel::import(new FileImport($this->uploadId), $this->uploadedFilePath);
+        try {
+            Excel::import(new FileImport($this->uploadId), $this->uploadedFilePath);
+        }catch (\Exception $exception){
+            //Send email
+            $upload = Upload::find($this->uploadId);
+            event(new ImportError($upload));
+        }
     }
 
 
